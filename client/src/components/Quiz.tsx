@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Question } from '../models/Question';
 import { getQuestions } from '../services/questionApi';
 
@@ -12,6 +12,7 @@ const Quiz = () => {
 	const getRandomQuestions = async () => {
 		try {
 			const questions = await getQuestions();
+			console.log('Received questions:', questions);
 
 			if (!questions) {
 				throw new Error('something went wrong!');

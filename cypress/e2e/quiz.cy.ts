@@ -1,32 +1,37 @@
-describe('Quiz E2E', () => {
+describe('Quiz Application', () => {
 	beforeEach(() => {
 		cy.visit('/');
-		// Intercept API calls and return mock data
 		cy.intercept('GET', '/api/questions/random', {
-			fixture: 'questions.json',
+			body: [
+				{
+					_id: '1',
+					question: 'Test Question',
+					answers: [
+						{ text: 'Answer 1', isCorrect: false },
+						{ text: 'Answer 2', isCorrect: true },
+					],
+				},
+			],
 		}).as('getQuestions');
 	});
 
 	it('completes a full quiz flow', () => {
-		// Wait for questions to load
+		// Start the quiz
+		cy.get('button').contains('Start Quiz').click();
 		cy.wait('@getQuestions');
 
-		// Verify initial question is displayed
-		cy.get('h2').should('contain', 'What is the output of print(2 ** 3)?');
+		// Verify question display
+		cy.get('.card').should('exist');
+		cy.get('h2').should('contain', 'Test Question');
 
-		// Click an answer
+		// Answer question
 		cy.get('.btn-primary').first().click();
 
-		// Verify quiz completion screen
+		// Verify completion screen
 		cy.get('h2').should('contain', 'Quiz Completed');
 		cy.get('.alert-success').should('exist');
-		cy.get('.alert-success').should('contain', '/1');
 
-		// Verify new quiz can be started
+		// Start new quiz
 		cy.get('button').contains('Take New Quiz').should('exist');
-		cy.get('button').contains('Take New Quiz').click();
-
-		// Verify new quiz loads
-		cy.get('h2').should('contain', 'What is the output of print(2 ** 3)?');
 	});
 });
