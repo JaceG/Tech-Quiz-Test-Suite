@@ -57,7 +57,7 @@ npx cypress open --e2e
 This project was created as part of a coding bootcamp challenge. Sources and References: Portions of the code and guidance were provided with assistance from ChatGPT, Tutors, and my Instructors.
 
 ## Walkthrough Video
-[Link to Video Demonstration](your-video-link-here)
+[Link to Video Demonstration](https://drive.google.com/file/d/1DLB0u5qD_Z-jhwEE0V-60-7RafvAE5GQ/view?usp=sharing)
 
 ## Questions
 For any questions, please contact me:
